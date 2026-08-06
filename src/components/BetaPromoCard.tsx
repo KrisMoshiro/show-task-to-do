@@ -1,15 +1,23 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import AndroidIcon from '@mui/icons-material/Android';
-import logoImg from '../assets/ICON.png';
+import type { ColorScheme } from '../data/themes';
 
-export const BetaPromoCard: React.FC = () => {
+interface BetaPromoCardProps {
+    colors?: ColorScheme;
+}
+
+export const BetaPromoCard: React.FC<BetaPromoCardProps> = ({ colors }) => {
+    const textColor = colors?.textVariant || colors?.text || '#FFFFFF';
+    const titleColor = colors?.text || '#FFFFFF';
+    const cardBg = colors?.card || 'rgba(0, 0, 0, 0.75)';
+    const accentColor = colors?.accent || '#367CA4';
+    const hoverBg = colors?.primaryVariant || '#2D6593';
+
     return (
         <Box
             sx={{
-                width: { xs: 280, sm: 340, md: 400 },
-                height: { xs: 440, sm: 500, md: 540 },
-                // Sin contenedor, bordes ni sombreado encajonado
+                width: { xs: 300, sm: 420, md: 500 },
                 background: 'none',
                 boxShadow: 'none',
                 border: 'none',
@@ -18,61 +26,74 @@ export const BetaPromoCard: React.FC = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 textAlign: 'center',
-                color: '#FFFFFF',
                 userSelect: 'none',
                 px: 2,
+                py: 1,
             }}
         >
-            {/* Logo de Task To Do */}
-            <Box
-                component="img"
-                src={logoImg}
-                alt="Task To Do Logo"
-                sx={{
-                    width: { xs: 90, sm: 110, md: 125 },
-                    height: 'auto',
-                    mb: 2.5,
-                    filter: 'drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35))',
-                    transition: 'transform 0.4s ease-in-out',
-                    '&:hover': {
-                        transform: 'scale(1.05) translateY(-4px)',
-                    },
-                }}
-            />
-
-            {/* Nombre de la Aplicación */}
             <Typography
-                variant="h4"
-                component="h2"
+                variant="h6"
                 sx={{
-                    fontFamily: 'Playfair Display, serif',
-                    fontWeight: 'bold',
-                    letterSpacing: 0.5,
-                    color: '#FFFFFF',
-                    mb: 1,
-                    fontSize: { xs: '1.8rem', sm: '2.2rem' },
-                    textShadow: '0 2px 10px rgba(0,0,0,0.3)',
-                }}
-            >
-                Task To Do
-            </Typography>
-
-            {/* Bajada invitando a la Beta */}
-            <Typography
-                variant="body2"
-                sx={{
-                    opacity: 0.85,
-                    maxWidth: 320,
-                    mb: 3.5,
-                    fontSize: { xs: '0.9rem', sm: '1rem' },
-                    lineHeight: 1.5,
-                    color: '#DAEFFD',
+                    fontWeight: 500,
+                    maxWidth: 460,
+                    mb: 4,
+                    fontSize: { xs: '1.05rem', sm: '1.25rem' },
+                    lineHeight: 1.6,
+                    color: textColor,
+                    transition: 'color 0.5s ease',
                 }}
             >
                 Sé de los primeros en experimentar la mejor forma de organizar tus proyectos y rutinas.
             </Typography>
-
-            {/* Botón Acción Principal */}
+            <Box
+                sx={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 2,
+                    backgroundColor: cardBg,
+                    color: titleColor,
+                    px: { xs: 3.5, sm: 4.5 },
+                    py: { xs: 1.4, sm: 1.8 },
+                    borderRadius: '18px',
+                    border: `1.5px solid ${accentColor}`,
+                    boxShadow: '0 8px 20px rgba(0,0,0,0.12)',
+                    mb: 3,
+                    transition: 'all 0.4s ease',
+                    '&:hover': {
+                        transform: 'scale(1.03)',
+                        backgroundColor: hoverBg,
+                    },
+                }}
+            >
+                <AndroidIcon sx={{ fontSize: { xs: 32, sm: 40 }, color: '#3DDC84' }} />
+                <Box sx={{ textAlign: 'left' }}>
+                    <Typography
+                        variant="caption"
+                        sx={{
+                            display: 'block',
+                            fontSize: { xs: '0.7rem', sm: '0.78rem' },
+                            opacity: 0.8,
+                            lineHeight: 1,
+                            letterSpacing: 1,
+                            fontWeight: 'bold',
+                            color: textColor,
+                        }}
+                    >
+                        PRÓXIMAMENTE EN
+                    </Typography>
+                    <Typography
+                        variant="subtitle1"
+                        sx={{
+                            fontWeight: 'bold',
+                            fontSize: { xs: '1rem', sm: '1.2rem' },
+                            lineHeight: 1.2,
+                            color: titleColor,
+                        }}
+                    >
+                        Google Play
+                    </Typography>
+                </Box>
+            </Box>
             <Button
                 variant="contained"
                 size="large"
@@ -80,51 +101,22 @@ export const BetaPromoCard: React.FC = () => {
                     borderRadius: '30px',
                     textTransform: 'none',
                     fontWeight: 'bold',
-                    fontSize: '1rem',
-                    px: 4,
-                    py: 1.2,
-                    mb: 3,
-                    backgroundColor: '#367CA4',
-                    boxShadow: '0 8px 20px rgba(54, 124, 164, 0.4)',
-                    transition: 'all 0.3s ease',
+                    fontSize: { xs: '1rem', sm: '1.1rem' },
+                    px: { xs: 4, sm: 5 },
+                    py: 1.4,
+                    backgroundColor: accentColor,
+                    color: titleColor,
+                    boxShadow: '0 8px 20px rgba(0,0,0,0.15)',
+                    transition: 'all 0.4s ease',
                     '&:hover': {
-                        backgroundColor: '#2D6593',
-                        boxShadow: '0 12px 25px rgba(54, 124, 164, 0.6)',
+                        backgroundColor: hoverBg,
+                        boxShadow: '0 12px 25px rgba(0,0,0,0.25)',
                         transform: 'translateY(-2px)',
                     },
                 }}
             >
                 Solicitar Acceso a la Beta
             </Button>
-
-            {/* Insignia Próximamente Google Play */}
-            <Box
-                sx={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: 1.5,
-                    backgroundColor: 'rgba(0, 0, 0, 0.65)',
-                    backdropFilter: 'blur(8px)',
-                    color: '#FFFFFF',
-                    px: 2.5,
-                    py: 1,
-                    borderRadius: '14px',
-                    border: '1px solid rgba(255, 255, 255, 0.15)',
-                }}
-            >
-                <AndroidIcon sx={{ fontSize: 26, color: '#3DDC84' }} />
-                <Box sx={{ textAlign: 'left' }}>
-                    <Typography
-                        variant="caption"
-                        sx={{ display: 'block', fontSize: '0.62rem', opacity: 0.75, lineHeight: 1, letterSpacing: 0.5 }}
-                    >
-                        PRÓXIMAMENTE EN
-                    </Typography>
-                    <Typography variant="subtitle2" sx={{ fontWeight: 'bold', fontSize: '0.88rem', lineHeight: 1.2 }}>
-                        Google Play
-                    </Typography>
-                </Box>
-            </Box>
         </Box>
     );
 };

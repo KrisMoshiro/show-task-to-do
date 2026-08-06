@@ -12,7 +12,6 @@ interface AnimatedBackgroundProps {
 }
 
 export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ paletteId, mode }) => {
-    // Obtenemos los colores exactos del tema activo
     const activeTheme = themes[paletteId];
     const colors = activeTheme ? activeTheme[mode] : themes.default.light;
 
@@ -27,12 +26,11 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ paletteI
                 overflow: 'hidden',
                 pointerEvents: 'none',
                 zIndex: 0,
-                // Usamos el gradiente/fondo dinámico del tema
                 background: `linear-gradient(180deg, ${colors.gradientTop} 0%, ${colors.background} 100%)`,
-                transition: 'background 0.6s ease-in-out', // Transición suave al cambiar de tema
+                transition: 'background 0.6s ease-in-out',
             }}
         >
-            {/* Círculo Superior Izquierdo */}
+
             <MotionBox
                 sx={{
                     position: 'absolute',
@@ -41,7 +39,7 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ paletteI
                     width: { xs: 260, sm: 340, md: 420 },
                     height: { xs: 260, sm: 340, md: 420 },
                     borderRadius: '50%',
-                    backgroundColor: colors.primaryVariant, // Dinámico
+                    backgroundColor: colors.primaryVariant,
                     opacity: mode === 'dark' ? 0.4 : 0.65,
                     transition: 'background-color 0.6s ease-in-out',
                 }}
@@ -49,7 +47,6 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ paletteI
                 transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
             />
 
-            {/* Forma Ovalada Lateral Derecha */}
             <MotionBox
                 sx={{
                     position: 'absolute',
@@ -58,7 +55,7 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ paletteI
                     width: { xs: 200, sm: 260, md: 300 },
                     height: { xs: 300, sm: 360, md: 420 },
                     borderRadius: '120px',
-                    backgroundColor: colors.card, // Dinámico
+                    backgroundColor: colors.card,
                     opacity: mode === 'dark' ? 0.35 : 0.5,
                     transform: 'rotate(12deg)',
                     transition: 'background-color 0.6s ease-in-out',
@@ -66,8 +63,6 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ paletteI
                 animate={{ y: [0, 25, 0], rotate: [12, 16, 12] }}
                 transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
             />
-
-            {/* Círculo Inferior Izquierdo */}
             <MotionBox
                 sx={{
                     position: 'absolute',
@@ -76,7 +71,7 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ paletteI
                     width: { xs: 280, sm: 360, md: 440 },
                     height: { xs: 280, sm: 360, md: 440 },
                     borderRadius: '50%',
-                    backgroundColor: colors.secondary, // Dinámico
+                    backgroundColor: colors.secondary,
                     opacity: mode === 'dark' ? 0.4 : 0.6,
                     transition: 'background-color 0.6s ease-in-out',
                 }}
