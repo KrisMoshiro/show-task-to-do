@@ -28,7 +28,7 @@ export const DeviceMockup: React.FC<DeviceMockupProps> = ({
             <Box
                 sx={{
                     width: '100%',
-                    aspectRatio: '10 / 15', // Proporción más alta verticalmente para acomodar pantallas de tablet completas
+                    aspectRatio: '10 / 15',
                     borderRadius: '24px',
                     border: '10px solid #1C1C1E',
                     backgroundColor: '#1C1C1E',
@@ -49,7 +49,7 @@ export const DeviceMockup: React.FC<DeviceMockupProps> = ({
                             width: '100%',
                             height: '100%',
                             objectFit: 'cover',
-                            objectPosition: 'top center', // Asegura que la parte superior de la imagen se muestre completa
+                            objectPosition: 'top center',
                             display: 'block',
                         }}
                     />
