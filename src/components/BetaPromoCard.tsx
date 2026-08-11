@@ -14,6 +14,8 @@ export const BetaPromoCard: React.FC<BetaPromoCardProps> = ({ colors }) => {
     const accentColor = colors?.accent || '#367CA4';
     const hoverBg = colors?.primaryVariant || '#2D6593';
 
+    const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeS1_h7t9OOqRacGgLA-PIk0p3IwwblJlRJQCg0Fw1m_B0XrA/viewform?usp=publish-editor';
+
     return (
         <Box
             sx={{
@@ -95,6 +97,10 @@ export const BetaPromoCard: React.FC<BetaPromoCardProps> = ({ colors }) => {
                 </Box>
             </Box>
             <Button
+                component="a"
+                href={FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 variant="contained"
                 size="large"
                 sx={{
