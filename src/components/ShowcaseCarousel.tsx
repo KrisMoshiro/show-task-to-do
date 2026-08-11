@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { Box, Typography, IconButton, useTheme, useMediaQuery} from '@mui/material';
+import { Box, Typography, IconButton, useTheme, useMediaQuery } from '@mui/material';
 import { motion } from 'framer-motion';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -21,8 +21,6 @@ export const ShowcaseCarousel: React.FC<ShowcaseCarouselProps> = ({
 }) => {
     const [activeIndex, setActiveIndex] = useState<number>(0);
     const containerRef = useRef<HTMLDivElement>(null);
-
-    // Medir ancho real del contenedor disponible
     const containerWidth = useContainerWidth(containerRef);
 
     const totalSlides = slides.length;
@@ -31,7 +29,7 @@ export const ShowcaseCarousel: React.FC<ShowcaseCarouselProps> = ({
     const isTablet = useMediaQuery(muiTheme.breakpoints.down('md'));
 
     const activeSlide = slides[activeIndex];
-    const activeTheme = themes[activeSlide.paletteId];
+    const activeTheme = themes[activeSlide?.paletteId];
     const activeColors = activeTheme ? activeTheme[activeSlide.themeMode] : themes.default.light;
 
     const gap = isMobile ? 20 : 32;
@@ -42,7 +40,7 @@ export const ShowcaseCarousel: React.FC<ShowcaseCarouselProps> = ({
         return isMobile ? 280 : isTablet ? 340 : 400; // 'promo'
     }, [isMobile, isTablet]);
 
-    const currentCardWidth = getCardWidth(activeSlide.type);
+    const currentCardWidth = getCardWidth(activeSlide?.type || 'phone');
 
     useEffect(() => {
         if (onSlideChange && activeSlide) {
@@ -66,9 +64,20 @@ export const ShowcaseCarousel: React.FC<ShowcaseCarouselProps> = ({
     }, [containerWidth, activeIndex, slides, gap, getCardWidth, currentCardWidth]);
 
     return (
-        <Box sx={{ width: '100%', py: { xs: 2, md: 4 }, margin: 0, padding: 0 }}>
-            {/* Encabezado */}
-            <Box sx={{ mb: { xs: 2, md: 3 }, px: 2, minHeight: 110, textAlign: 'center' }}>
+        <Box sx={{ width: '100%', py: { xs: 1, md: 2 }, margin: 0, padding: 0 }}>
+
+            <Box
+                sx={{
+                    mb: { xs: 1, sm: 1.5 },
+                    px: 2,
+                    py: { xs: 1.5, sm: 2 },
+                    textAlign: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
                 <Typography
                     variant="caption"
                     sx={{
@@ -76,10 +85,12 @@ export const ShowcaseCarousel: React.FC<ShowcaseCarouselProps> = ({
                         color: activeSlide.themeMode === 'dark' ? '#FFFFFF' : activeColors.text,
                         fontWeight: 'bold',
                         px: 2,
-                        py: 0.5,
+                        py: 0.4,
+                        my: { xs: 1.5, sm: 2 },
                         borderRadius: 10,
                         textTransform: 'uppercase',
                         letterSpacing: 1,
+                        fontSize: '0.72rem',
                         transition: 'all 0.4s ease',
                     }}
                 >
@@ -93,29 +104,42 @@ export const ShowcaseCarousel: React.FC<ShowcaseCarouselProps> = ({
                         fontFamily: 'Playfair Display, serif',
                         fontWeight: 'bold',
                         color: activeColors.text,
-                        fontSize: {xs: '1.75rem', sm: '2.0rem' },
-                        mt: 1.5,
-                        mb: 0.5,
+                        fontSize: { xs: '1.4rem', sm: '1.75rem', md: '2.0rem' },
+                        mt: 1,
+                        mb: 0,
                         transition: 'color 0.4s ease',
+                        lineHeight: 1.2,
                     }}
                 >
                     {activeSlide.title}
                 </Typography>
+
+                {activeSlide.subtitle && (
+                    <Typography
+                        variant="body2"
+                        sx={{
+                            color: activeColors.textVariant || activeColors.text,
+                            opacity: 0.85,
+                            fontSize: { xs: '0.85rem', sm: '0.95rem' },
+                            mt: 0.5,
+                        }}
+                    >
+                        {activeSlide.subtitle}
+                    </Typography>
+                )}
             </Box>
 
-            {/* Riel del Carrusel (Ancho 100% real sin hack de 100vw) */}
             <Box
                 ref={containerRef}
                 sx={{
                     position: 'relative',
-                    height: { xs: 480, sm: 560, md: 640 },
+                    height: { xs: 460, sm: 540, md: 620 },
                     width: '100%',
                     display: 'flex',
                     alignItems: 'center',
-                    py: 2,
+                    py: 1,
                 }}
             >
-                {/* Flecha Izquierda (Visibilidad Garantizada) */}
                 <IconButton
                     onClick={handlePrev}
                     disabled={activeIndex === 0}
@@ -134,7 +158,6 @@ export const ShowcaseCarousel: React.FC<ShowcaseCarouselProps> = ({
                     <ChevronLeftIcon fontSize={isMobile ? 'medium' : 'large'} />
                 </IconButton>
 
-                {/* Contenedor animado del riel */}
                 <Box sx={{ width: '100%', overflow: 'hidden', height: '100%', position: 'relative' }}>
                     <MotionBox
                         animate={{ x: translateX }}
@@ -183,7 +206,6 @@ export const ShowcaseCarousel: React.FC<ShowcaseCarouselProps> = ({
                     </MotionBox>
                 </Box>
 
-                {/* Flecha Derecha (Visibilidad Garantizada) */}
                 <IconButton
                     onClick={handleNext}
                     disabled={activeIndex === totalSlides - 1}
@@ -203,8 +225,7 @@ export const ShowcaseCarousel: React.FC<ShowcaseCarouselProps> = ({
                 </IconButton>
             </Box>
 
-            {/* Indicadores / Puntos inferiores */}
-            <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, mt: 2, zIndex: 10, position: 'relative' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, mt: 1.5, zIndex: 10, position: 'relative' }}>
                 {slides.map((_, i) => (
                     <Box
                         key={i}
