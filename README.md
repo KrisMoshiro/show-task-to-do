@@ -1,4 +1,4 @@
-# Showcase App - Task To Do
+# Showcase App - My Plan To Do
 
 <p align="center">
 <img width="80" height="80" height="512" alt="Logo_V3_2" src="https://github.com/user-attachments/assets/738b7b55-04a5-4a36-abd9-62a0c786608c" />
@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <a href="https://KrisMoshiro.github.io/show-task-to-do/"><strong>✨ Ver Demo en Vivo »</strong></a>
+  <a href="https://KrisMoshiro.github.io/show-task-to-do/"><strong>✨ Ver</strong></a>
 </p>
 
 ---

@@ -30,13 +30,13 @@ export const HeaderSection: React.FC<HeaderSectionProps> = ({ colors }) => {
                     transition: 'color 0.5s ease',
                 }}
             >
-                Task to Do
+                My Plan To Do
             </Typography>
 
             <Box
                 component="img"
                 src={logoImg}
-                alt="Task To Do Logo"
+                alt="My Plan To Do Logo"
                 sx={{
                     width: { xs: 95, sm: 115, md: 135 },
                     height: 'auto',
@@ -48,7 +48,6 @@ export const HeaderSection: React.FC<HeaderSectionProps> = ({ colors }) => {
                 }}
             />
 
-            {/* Texto Descriptivo Centrado */}
             <Typography
                 variant="body1"
                 sx={{
