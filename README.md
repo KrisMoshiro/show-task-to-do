@@ -1,9 +1,8 @@
 # Showcase App - Task To Do
 
 <p align="center">
-  <img src="public/favicon.png" alt="Logo" width="80" height="80" />
-</p>
-
+<img width="80" height="80" height="512" alt="Logo_V3_2" src="https://github.com/user-attachments/assets/738b7b55-04a5-4a36-abd9-62a0c786608c" />
+  
 <p align="center">
   <strong>Demostración web e interactiva de diseñoUI/UX porteada a React JS</strong>
 </p>
