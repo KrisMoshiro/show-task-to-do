@@ -3,7 +3,7 @@ import { Box, Button } from '@mui/material';
 import { ShowcaseCarousel } from './components/ShowcaseCarousel';
 import { AnimatedBackground } from './components/AnimatedBackground';
 import { HeaderSection } from './components/HeaderSection';
-import { DeviceFilter, type FilterType } from './components/DeviceFilter';
+import { Showdevice, type DeviceType } from './components/Showdevice';
 import { BetaPromoSection } from './components/BetaPromoSection';
 import { unifiedSlidesData } from './data/slidesData';
 import { themes, type PaletteId } from './data/themes';
@@ -11,9 +11,9 @@ import { themes, type PaletteId } from './data/themes';
 export const App: React.FC = () => {
   const [currentPalette, setCurrentPalette] = useState<PaletteId>('sunset');
   const [currentMode, setCurrentMode] = useState<'light' | 'dark'>('light');
-  const [filter, setFilter] = useState<FilterType>('phone');
-  const [isCarouselVisible, setIsCarouselVisible] = useState<boolean>(false);
-  const carouselSectionRef = useRef<HTMLDivElement>(null);
+
+  const [filter, setFilter] = useState<DeviceType>('phone');
+  const exploreSectionRef = useRef<HTMLDivElement>(null);
 
   const activeTheme = themes[currentPalette];
   const activeColors = activeTheme ? activeTheme[currentMode] : themes.default.light;
@@ -23,29 +23,19 @@ export const App: React.FC = () => {
     setCurrentMode(themeMode);
   }, []);
 
-  // Filtrado seguro de slides
   const filteredSlides = useMemo(() => {
-    const items = unifiedSlidesData.filter((slide) => {
-      if (filter === 'phone') {
-        return slide.type === 'phone' || slide.type === 'promo' || !slide.type;
-      }
-      if (filter === 'tablet') {
-        return slide.type === 'tablet' || slide.type === 'promo' || !slide.type;
-      }
+    return unifiedSlidesData.filter((slide) => {
+      if (filter === 'phone') return slide.type === 'phone' || slide.type === 'promo';
+      if (filter === 'tablet') return slide.type === 'tablet' || slide.type === 'promo';
       return true;
     });
-    return items.length > 0 ? items : unifiedSlidesData;
   }, [filter]);
 
   const handleExploreClick = () => {
-    setIsCarouselVisible(true);
-
-    setTimeout(() => {
-      carouselSectionRef.current?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-    }, 100);
+    exploreSectionRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
   };
 
   return (
@@ -64,21 +54,19 @@ export const App: React.FC = () => {
       <AnimatedBackground paletteId={currentPalette} mode={currentMode} />
 
       <Box sx={{ position: 'relative', zIndex: 1, width: '100%' }}>
-
         <Box
           sx={{
-            minHeight: '100vh',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
             px: 2,
-            py: 4,
+            pt: { xs: 6, md: 8 },
+            pb: { xs: 3, md: 4 },
           }}
         >
           <HeaderSection colors={activeColors} />
-
-          <Box sx={{ mt: { xs: 5, sm: 6, md: 7 } }}>
+          <Box sx={{ mt: { xs: 3, sm: 4 } }}>
             <Button
               variant="contained"
               onClick={handleExploreClick}
@@ -91,7 +79,7 @@ export const App: React.FC = () => {
                 fontWeight: 'bold',
                 fontSize: { xs: '1rem', sm: '1.1rem' },
                 px: { xs: 5, sm: 7 },
-                py: 1.4,
+                py: 1.2,
                 boxShadow: '0 6px 18px rgba(0,0,0,0.12)',
                 transition: 'all 0.4s ease',
                 '&:hover': {
@@ -105,30 +93,25 @@ export const App: React.FC = () => {
             </Button>
           </Box>
         </Box>
-        {isCarouselVisible && (
-          <Box
-            ref={carouselSectionRef}
-            sx={{
-              pt: { xs: 2, md: 4 },
-              pb: { xs: 6, md: 10 },
-              transition: 'opacity 0.6s ease-in-out',
-            }}
-          >
-            {/* Filtros */}
-            <DeviceFilter
-              currentFilter={filter}
-              onFilterChange={setFilter}
-              colors={activeColors}
-              isDarkMode={currentMode === 'dark'}
-            />
 
-            {/* Carrusel */}
-            <Box sx={{ width: '100%', mb: { xs: 6, md: 8 } }}>
-              <ShowcaseCarousel slides={filteredSlides} onSlideChange={handleSlideChange} />
-            </Box>
-            <BetaPromoSection colors={activeColors} />
+        <Box
+          ref={exploreSectionRef}
+          sx={{
+            pt: { xs: 2, md: 3 },
+            pb: { xs: 6, md: 10 },
+          }}
+        >
+          <Showdevice
+            currentFilter={filter}
+            onFilterChange={setFilter}
+            colors={activeColors}
+            isDarkMode={currentMode === 'dark'}
+          />
+          <Box sx={{ width: '100%', mb: { xs: 8, md: 10 } }}>
+            <ShowcaseCarousel slides={filteredSlides} onSlideChange={handleSlideChange} />
           </Box>
-        )}
+          <BetaPromoSection colors={activeColors} />
+        </Box>
 
       </Box>
     </Box>

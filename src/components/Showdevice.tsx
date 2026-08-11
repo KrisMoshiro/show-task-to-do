@@ -2,23 +2,23 @@ import React from 'react';
 import { Stack, Button } from '@mui/material';
 import type { ColorScheme } from '../data/themes';
 
-export type FilterType = 'phone' | 'tablet';
+export type DeviceType = 'phone' | 'tablet';
 
-interface DeviceFilterProps {
-    currentFilter: FilterType;
-    onFilterChange: (filter: FilterType) => void;
+interface ShowdeviceProps {
+    currentFilter: DeviceType;
+    onFilterChange: (filter: DeviceType) => void;
     colors: ColorScheme;
     isDarkMode: boolean;
 }
 
-export const DeviceFilter: React.FC<DeviceFilterProps> = ({
+export const Showdevice: React.FC<ShowdeviceProps> = ({
     currentFilter,
     onFilterChange,
     colors,
     isDarkMode,
 }) => {
-    const getButtonSx = (filterType: FilterType) => {
-        const isActive = currentFilter === filterType;
+    const getButtonSx = (deviceType: DeviceType) => {
+        const isActive = currentFilter === deviceType;
         return {
             borderRadius: '20px',
             textTransform: 'none',
