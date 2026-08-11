@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { Box, Typography, IconButton, useTheme, useMediaQuery } from '@mui/material';
+import { Box, Typography, IconButton, useTheme, useMediaQuery} from '@mui/material';
 import { motion } from 'framer-motion';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';

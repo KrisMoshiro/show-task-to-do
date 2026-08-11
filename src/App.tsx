@@ -1,10 +1,11 @@
 import React, { useState, useCallback, useMemo, useRef } from 'react';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Divider } from '@mui/material';
 import { ShowcaseCarousel } from './components/ShowcaseCarousel';
 import { AnimatedBackground } from './components/AnimatedBackground';
 import { HeaderSection } from './components/HeaderSection';
 import { Showdevice, type DeviceType } from './components/Showdevice';
 import { BetaPromoSection } from './components/BetaPromoSection';
+import { AboutSection } from './components/AboutSection';
 import { unifiedSlidesData } from './data/slidesData';
 import { themes, type PaletteId } from './data/themes';
 
@@ -37,6 +38,7 @@ export const App: React.FC = () => {
       block: 'start',
     });
   };
+  const containerMaxWidth = { maxWidth: 900, mx: 'auto', px: { xs: 2, sm: 4 } };
 
   return (
     <Box
@@ -54,18 +56,20 @@ export const App: React.FC = () => {
       <AnimatedBackground paletteId={currentPalette} mode={currentMode} />
 
       <Box sx={{ position: 'relative', zIndex: 1, width: '100%' }}>
+
         <Box
           sx={{
+            ...containerMaxWidth,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            px: 2,
             pt: { xs: 6, md: 8 },
             pb: { xs: 3, md: 4 },
           }}
         >
           <HeaderSection colors={activeColors} />
+
           <Box sx={{ mt: { xs: 3, sm: 4 } }}>
             <Button
               variant="contained"
@@ -94,23 +98,37 @@ export const App: React.FC = () => {
           </Box>
         </Box>
 
-        <Box
-          ref={exploreSectionRef}
-          sx={{
-            pt: { xs: 2, md: 3 },
-            pb: { xs: 6, md: 10 },
-          }}
-        >
+        <Box sx={containerMaxWidth}>
+          <Divider sx={{ my: 3, borderColor: activeColors.text, opacity: 0.2 }} />
+        </Box>
+
+        <Box ref={exploreSectionRef} sx={{ pt: { xs: 2, md: 3 }, pb: { xs: 4, md: 6 } }}>
           <Showdevice
             currentFilter={filter}
             onFilterChange={setFilter}
             colors={activeColors}
             isDarkMode={currentMode === 'dark'}
           />
-          <Box sx={{ width: '100%', mb: { xs: 8, md: 10 } }}>
+
+          <Box sx={{ width: '100%', mt: 3, mb: 2 }}>
             <ShowcaseCarousel slides={filteredSlides} onSlideChange={handleSlideChange} />
           </Box>
+        </Box>
+
+        <Box sx={containerMaxWidth}>
+          <Divider sx={{ my: 3, borderColor: activeColors.text, opacity: 0.2 }} />
+        </Box>
+
+        <Box sx={containerMaxWidth}>
           <BetaPromoSection colors={activeColors} />
+        </Box>
+
+        <Box sx={containerMaxWidth}>
+          <Divider sx={{ my: 3, borderColor: activeColors.text, opacity: 0.2 }} />
+        </Box>
+
+        <Box sx={containerMaxWidth}>
+          <AboutSection colors={activeColors} />
         </Box>
 
       </Box>
