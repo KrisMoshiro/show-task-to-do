@@ -93,29 +93,14 @@ export const ShowcaseCarousel: React.FC<ShowcaseCarouselProps> = ({
                         fontFamily: 'Playfair Display, serif',
                         fontWeight: 'bold',
                         color: activeColors.text,
-                        fontSize: { xs: '1.75rem', sm: '2.4rem', md: '2.8rem' },
+                        fontSize: {xs: '1.75rem', sm: '2.0rem' },
                         mt: 1.5,
                         mb: 0.5,
                         transition: 'color 0.4s ease',
                     }}
                 >
-                    "{activeSlide.title}"
+                    {activeSlide.title}
                 </Typography>
-
-                {activeSlide.subtitle && (
-                    <Typography
-                        variant="body1"
-                        sx={{
-                            color: activeColors.textVariant || activeColors.text,
-                            maxWidth: 500,
-                            mx: 'auto',
-                            fontSize: { xs: '0.875rem', sm: '1rem' },
-                            transition: 'color 0.4s ease',
-                        }}
-                    >
-                        {activeSlide.subtitle}
-                    </Typography>
-                )}
             </Box>
 
             {/* Riel del Carrusel (Ancho 100% real sin hack de 100vw) */}
