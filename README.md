@@ -15,7 +15,7 @@
 
 ## 📌 Sobre el Proyecto
 
-Esta página web nace como una **plataforma de exhibición y landing page interactiva** para mostrar el diseño, la dirección de arte y las maquetas conceptuales de **Task To Do**, una aplicación móvil enfocada en la gestión eficiente de tareas y rutinas en la que me encuentro trabajando.
+Esta página web nace como una **plataforma de exhibición y landing page interactiva** para mostrar el diseño, la dirección de arte y las maquetas conceptuales de **My Plan To Do**, una aplicación móvil enfocada en la gestión eficiente de tareas y rutinas en la que me encuentro trabajando.
 
 Para llevar la experiencia de la app a la web, decidí **portear e implementar los componentes visuales y paletas de temas a React JS**, permitiendo a los usuarios interactuar con los mockups en tiempo real, cambiar entre modos claro/oscuro y explorar diferentes paletas de color antes de su lanzamiento oficial.
 
